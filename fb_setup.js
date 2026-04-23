@@ -8,14 +8,15 @@
 // Return: n/a
 /**************************************************************/
   const firebaseConfig = {
-    apiKey: ,
-    authDomain: ,
-    databaseURL: ,
-    projectId: ,
-    storageBucket: ,
-    messagingSenderId:,
-    appId:
-  };
+  apiKey: "AIzaSyAJgsVQhp8Y3JEHcoy9a2frecPmwqNxJ8k",
+  authDomain: "lukas-ngan-12comp.firebaseapp.com",
+  databaseURL: "https://lukas-ngan-12comp-default-rtdb.firebaseio.com",
+  projectId: "lukas-ngan-12comp",
+  storageBucket: "lukas-ngan-12comp.firebasestorage.app",
+  messagingSenderId: "869637604136",
+  appId: "1:869637604136:web:93e2c9d61d10a51237061d",
+  measurementId: "G-7GZHJR55WJ"
+};
 
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
