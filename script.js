@@ -36,7 +36,7 @@ function goodbye() {
 }
 
 function fb_readError(error) {
-  firebase.database().ref('/').child('message' ).once('value', displayfb_readError);
+  firebase.database().ref('/').child('message').once('value', displayfb_readError);
   console.log("There was an error reading the message");
   console.error(error);
 }
@@ -55,12 +55,15 @@ function displayRead(snapshot) {
 function display(snapshot) {
   var dbData = snapshot.val();
   if (dbData == null) { // if there is no data, dbData will be null.
-    console.log('There was no record when trying to read the message'0);
- else {
+    console.log('There was no record when trying to read the message');
+  }
+
+else {
       console.log("The message is: " + dbData)
+
     }
   }
-}
+
 
 function fb_readListener() {
   console.log("Read Listener");
