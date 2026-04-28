@@ -33,10 +33,16 @@ function goodbye(){
     }
   )
 }
-function Do_This(){
-  firebase.database().ref('/message').once('value', Do_This){
-    {
-     console.log(snapshot.val())
-    }
-  }
+function simpleRead() {
+console. log("Reading message");
+firebase.database().ref('/').child('message').once('value', displayRead);
+console. log("Leaving simpleRead")
+}
+
+
+
+function displayRead(snapshot) {
+console. log("Running displayRead(), the message is: " + snapshot.val())
+HTML_OUTPUT. innerHTML = snapshot.val();
+
 }
