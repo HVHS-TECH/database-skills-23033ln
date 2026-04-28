@@ -18,10 +18,25 @@ const HTML_OUTPUT = document.getElementById("databaseOutput");
 // This means it replaces the whole database with message:Hello World
 /**************************************************************/
 function helloWorld(){
-  console.log("Running Keaora()")
-  firebase.database().ref('/').set(
+  console.log("Running helloworld()")
+  firebase.database().ref('users/ben').set(
     {
-      message: 'Kea ora'
+      message: 'Kia ora te ao'
     }
   )
+}
+function goodbye(){
+  console.log("Running goodbye()")
+  firebase.database().ref('users/ben').set(
+    {
+      message: '"Goodbye/ka kite āno'
+    }
+  )
+}
+function Do_This(){
+  firebase.database().ref('/message').once('value', Do_This){
+    {
+     console.log(snapshot.val())
+    }
+  }
 }
