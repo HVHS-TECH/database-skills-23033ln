@@ -17,32 +17,52 @@ const HTML_OUTPUT = document.getElementById("databaseOutput");
 // The ref('/') part tells the operation to write to the base level of the database "/"
 // This means it replaces the whole database with message:Hello World
 /**************************************************************/
-function helloWorld(){
+function helloWorld() {
   console.log("Running helloworld()")
-  firebase.database().ref('users/ben').set(
+  firebase.database().ref('/').set(
     {
       message: 'Kia ora te ao'
     }
   )
 }
-function goodbye(){
+
+function goodbye() {
   console.log("Running goodbye()")
-  firebase.database().ref('users/ben').set(
+  firebase.database().ref('/').set(
     {
       message: '"Goodbye/ka kite āno'
     }
   )
 }
-function simpleRead() {
-console. log("Reading message");
-firebase.database().ref('/').child('message').once('value', displayRead);
-console. log("Leaving simpleRead")
+
+function fb_readError(error) {
+  firebase.database().ref('/').child('message' ).once('value', displayfb_readError);
+  console.log("There was an error reading the message");
+  console.error(error);
 }
 
-
+function simpleRead() {
+  console.log("Reading message");
+  firebase.database().ref('/').child('message').once('value', displayRead);
+  console.log("Leaving simpleRead")
+}
 
 function displayRead(snapshot) {
-console. log("Running displayRead(), the message is: " + snapshot.val())
-HTML_OUTPUT. innerHTML = snapshot.val();
+  console.log("Running displayRead(), the message is: " + snapshot.val())
+  HTML_OUTPUT.innerHTML = snapshot.val();
+}
 
+function display(snapshot) {
+  var dbData = snapshot.val();
+  if (dbData == null) { // if there is no data, dbData will be null.
+    console.log('There was no record when trying to read the message'0);
+ else {
+      console.log("The message is: " + dbData)
+    }
+  }
+}
+
+function fb_readListener() {
+  console.log("Read Listener");
+  firebase.database().ref('/message').on('value', fb_logDatabaseRead)
 }
