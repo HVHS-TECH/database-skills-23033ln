@@ -24,13 +24,49 @@ function helloWorld() {
       message: 'Kia ora te ao'
     }
   )
+  
 }
+
+
+function fb_readHighScores( ){
+console. log("Reading High scores");
+firebase.database().ref('/highScores/game1' ).once('value', databaseOutput, fb_error)
+}
+
+highscoreTable = {
+  game1: {
+    users: {
+     lukas: 12324432523545245,
+      Coby: 12343567891234567890,
+      Pasha: 897,
+      Josh: 322323,
+      Callum: 123456789123456
+    }
+
+  },
+
+ game2 :{
+    users: {
+      lukas: 23266476645656,
+      Coby: 16465464654,
+      Pasha: 64565464567,
+      Josh: 35464565464,
+      Callum: 64564564512
+
+    } 
+
+  }
+
+}
+
+firebase.database().ref('/').set(highscoreTable)
 
 function goodbye() {
   console.log("Running goodbye()")
   firebase.database().ref('/').set(
     {
       message: '"Goodbye/ka kite āno'
+
     }
   )
 }
@@ -48,20 +84,20 @@ function displayRead(snapshot) {
 
 function display(snapshot) {
   var dbData = snapshot.val();
-    firebase.database().ref('/').child('message').once('value', displayfb_readError);
+  firebase.database().ref('/').child('message').once('value', displayfb_readError);
   if (dbData == null) { // if there is no data, dbData will be null.
     console.log('There was no record when trying to read the message');
   }
 
-else {
-      console.log("The message is: " + dbData)
+  else {
+    console.log("The message is: " + dbData)
 
-    }
   }
+}
 
 
 function fb_readListener() {
   console.log("Read Listener");
-  firebase.database().ref('/message').on('value', fb_logDatabaseRead)
+  firebase.database().ref('/message').on('value', displayRead)
 }
 
