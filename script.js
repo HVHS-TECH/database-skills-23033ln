@@ -17,6 +17,21 @@ const HTML_OUTPUT = document.getElementById("databaseOutput");
 // The ref('/') part tells the operation to write to the base level of the database "/"
 // This means it replaces the whole database with message:Hello World
 /**************************************************************/
+
+
+
+
+// the person//
+var person = {
+firstName: "Coby",
+lastName: "Rollo",
+age: 100000000000000000000,
+eyeColor: "brown"
+};
+person["age"] = 20;
+///////////////
+
+//the start of the hello//
 function helloWorld() {
   console.log("Running helloworld()")
   firebase.database().ref('/').set(
@@ -24,19 +39,31 @@ function helloWorld() {
       message: 'Kia ora te ao'
     }
   )
-  
+
 }
+//////////////////////////
 
 
-function fb_readHighScores( ){
-console. log("Reading High scores");
-firebase.database().ref('/highScores/game1' ).once('value', databaseOutput, fb_error)
+function fb_displayHighScores(snapshot) {
+  let highScores = snapshot.val()
+  console.log("Coby Rollo  got " + highScores["Coby Rollo"] + " points")
+
 }
+
+function fb_readHighScores() {
+  console.log("Reading High scores");
+  firebase.database().ref('/highScores/game1').once('value', databaseOutput, fb_readError)
+}
+
+//for(i = 0; i < names. length; i++){
+//let key = names[i];
+//console. log( "Score "+i+" is for "+ key)
+//}
 
 highscoreTable = {
   game1: {
     users: {
-     lukas: 12324432523545245,
+      lukas: 12324432523545245,
       Coby: 12343567891234567890,
       Pasha: 897,
       Josh: 322323,
@@ -45,7 +72,7 @@ highscoreTable = {
 
   },
 
- game2 :{
+  game2: {
     users: {
       lukas: 23266476645656,
       Coby: 16465464654,
@@ -53,7 +80,7 @@ highscoreTable = {
       Josh: 35464565464,
       Callum: 64564564512
 
-    } 
+    }
 
   }
 
