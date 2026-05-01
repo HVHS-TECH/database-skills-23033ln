@@ -27,3 +27,4 @@ function fb_showOneScore(child) {
 console. log(child.val());
 
 }
+

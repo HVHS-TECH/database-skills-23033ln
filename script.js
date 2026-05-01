@@ -50,9 +50,13 @@ function fb_displayHighScores(snapshot) {
 
 }
 
+function fb_readHighScores( ){
+console. log( "Reading High scores");
+firebase.database( ).ref('/game1/user' ).once('value', fb_displayHighScores, fb_readError)
+}
 function fb_readHighScores() {
   console.log("Reading High scores");
-  firebase.database().ref('/highScores/game1').once('value', databaseOutput, fb_readError)
+  firebase.database().ref('/game1/user').once('value', displayRead, fb_readError)
 }
 
 //for(i = 0; i < names. length; i++){
@@ -106,12 +110,12 @@ function simpleRead() {
 
 function displayRead(snapshot) {
   console.log("Running displayRead(), the message is: " + snapshot.val())
-  HTML_OUTPUT.innerHTML = snapshot.val();
+  HTML_OUTPUT.innerHTML = snapshot.val( );
 }
 
 function display(snapshot) {
-  var dbData = snapshot.val();
-  firebase.database().ref('/').child('message').once('value', displayfb_readError);
+  var dbData = snapshot.val( );
+  firebase.database().ref('/').child('message').once('value', fb_readError);
   if (dbData == null) { // if there is no data, dbData will be null.
     console.log('There was no record when trying to read the message');
   }
