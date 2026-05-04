@@ -20,16 +20,30 @@ const HTML_OUTPUT = document.getElementById("databaseOutput");
 
 
 
+let scoreObject = {
+  "Coby": 1000,
+  "Josh": 1001
+
+}
+console.log(
+  scoreObject["Coby"]  
+)
 
 // the person//
 var person = {
 firstName: "Coby",
 lastName: "Rollo",
 age: 100000000000000000000,
-eyeColor: "brown"
+eyeColor: "ghghghgh"
 };
 person["age"] = 20;
+
+
+console. log(person["eyeColor"])
+console.log(person["firstname"]) 
+console.log(person["lastname"])
 ///////////////
+
 
 //the start of the hello//
 function helloWorld() {
@@ -52,7 +66,7 @@ function fb_displayHighScores(snapshot) {
 
 function fb_readHighScores( ){
 console. log( "Reading High scores");
-firebase.database( ).ref('/game1/user' ).once('value', fb_displayHighScores, fb_readError)
+firebase.database( ).ref('/game1  /user' ).once('value', fb_displayHighScores, fb_readError)
 }
 function fb_readHighScores() {
   console.log("Reading High scores");
@@ -110,19 +124,18 @@ function simpleRead() {
 
 function displayRead(snapshot) {
   console.log("Running displayRead(), the message is: " + snapshot.val())
-  HTML_OUTPUT.innerHTML = snapshot.val( );
+  HTML_OUTPUT.innerHTML = snapshot.val();
+}
+
+function advancedRead() {
+  console.log("Reading message");
+  firebase.database().ref('game1/users').on('value', display, fb_readError)
 }
 
 function display(snapshot) {
-  var dbData = snapshot.val( );
-  firebase.database().ref('/').child('message').once('value', fb_readError);
-  if (dbData == null) { // if there is no data, dbData will be null.
-    console.log('There was no record when trying to read the message');
-  }
-
-  else {
-    console.log("The message is: " + dbData)
-
+  let dbData = snapshot.val();
+  console.log(dbData);
+  for () {
   }
 }
 
