@@ -135,13 +135,21 @@ function advancedRead() {
 function display(snapshot) {
   let dbData = snapshot.val();
   console.log(dbData);
-  for () {
+  let text = "";
+  for (let [usernames, score] of Object.entries(dbData)) {
+    text += usernames + ": " + score + "<br>";
   }
+   HTML_OUTPUT.innerHTML = text
 }
 
 
 function fb_readListener() {
   console.log("Read Listener");
   firebase.database().ref('/message').on('value', displayRead)
+}
+
+function fb_readError(error) {
+  console.log("There was an error reading the message");
+  console.error(error);
 }
 
