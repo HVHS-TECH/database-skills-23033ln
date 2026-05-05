@@ -39,9 +39,10 @@ eyeColor: "ghghghgh"
 person["age"] = 20;
 
 
-console. log(person["eyeColor"])
-console.log(person["firstname"]) 
-console.log(person["lastname"])
+console.log(person["eyeColor"])
+console.log(person["firstName"]) 
+console.log(person["lastName"])
+console.log(person["age"])
 ///////////////
 
 
@@ -152,4 +153,5 @@ function fb_readError(error) {
   console.log("There was an error reading the message");
   console.error(error);
 }
+
 
