@@ -19,6 +19,11 @@ const HTML_OUTPUT = document.getElementById("databaseOutput");
 /**************************************************************/
 
 
+function fb_readError(error) {
+  console.log("There was an error reading the message");
+  console.error(error);
+}
+
 
 let scoreObject = {
   "Coby": 1000,
@@ -58,20 +63,15 @@ function helloWorld() {
 }
 //////////////////////////
 
-
 function fb_displayHighScores(snapshot) {
   let highScores = snapshot.val()
   console.log("Coby Rollo  got " + highScores["Coby Rollo"] + " points")
 
 }
 
-function fb_readHighScores( ){
+function fb_readHighScores(){
 console. log( "Reading High scores");
 firebase.database( ).ref('/game1  /user' ).once('value', fb_displayHighScores, fb_readError)
-}
-function fb_readHighScores() {
-  console.log("Reading High scores");
-  firebase.database().ref('/game1/user').once('value', displayRead, fb_readError)
 }
 
 //for(i = 0; i < names. length; i++){
@@ -134,6 +134,7 @@ function advancedRead() {
 }
 
 function display(snapshot) {
+   
   let dbData = snapshot.val();
   console.log(dbData);
   let text = "";
@@ -147,11 +148,6 @@ function display(snapshot) {
 function fb_readListener() {
   console.log("Read Listener");
   firebase.database().ref('/message').on('value', displayRead)
-}
-
-function fb_readError(error) {
-  console.log("There was an error reading the message");
-  console.error(error);
 }
 
 
