@@ -31,21 +31,21 @@ let scoreObject = {
 
 }
 console.log(
-  scoreObject["Coby"]  
+  scoreObject["Coby"]
 )
 
 // the person//
 var person = {
-firstName: "Coby",
-lastName: "Rollo",
-age: 100000000000000000000,
-eyeColor: "ghghghgh"
+  firstName: "Coby",
+  lastName: "Rollo",
+  age: 100000000000000000000,
+  eyeColor: "ghghghgh"
 };
 person["age"] = 20;
 
 
 console.log(person["eyeColor"])
-console.log(person["firstName"]) 
+console.log(person["firstName"])
 console.log(person["lastName"])
 console.log(person["age"])
 ///////////////
@@ -63,21 +63,48 @@ function helloWorld() {
 }
 //////////////////////////
 
-function fb_displayHighScores(snapshot) {
+function fb_displayHighScoretable(snapshot) {
   let highScores = snapshot.val()
-  console.log("Coby Rollo  got " + highScores["Coby Rollo"] + " points")
+  console.log("Coby  got " + highscoreTable["Coby"] + " points")
 
 }
 
-function fb_readHighScores(){
-console. log( "Reading High scores");
-firebase.database( ).ref('/game1  /user' ).once('value', fb_displayHighScores, fb_readError)
+function fb_readHighScoretable() {
+  console.log("Reading High scores");
+  firebase.database().ref('/game1  /user').once('value', fb_displayHighScores, fb_readError)
 }
 
 //for(i = 0; i < names. length; i++){
 //let key = names[i];
 //console. log( "Score "+i+" is for "+ key)
 //}
+let names = ["lukas", "Coby", "Pasha", "Josh", "Callum"]
+
+function fb_highScoretable() {
+for (let i = 0; i < names.length; i++) {
+  let key = names[i];
+  console.log("User " + i + " " + key + " has the score of. " + highscoreTable['game1']['users'][key] + " points.")
+}
+}
+
+
+
+function fb_readHighScoretable() {
+  console.log("Reading High scores");
+  firebase.database().ref('/highScoretable/game1')
+    .once('value', fb_displayHighScores.fb_readError);
+
+}
+
+function fb_displayHighScoretable(snapshot) {
+  snapshot.forEach(fb_showOneScore)
+
+}
+
+function fb_showOneScore(child) {
+  console.log(child.key + " got " + child.val() + " points");
+
+}
 
 highscoreTable = {
   game1: {
@@ -93,11 +120,11 @@ highscoreTable = {
 
   game2: {
     users: {
-      lukas: 23266476645656,
-      Coby: 16465464654,
-      Pasha: 64565464567,
-      Josh: 35464565464,
-      Callum: 64564564512
+      ulkas: 23266476645656,
+      ocby: 16465464654,
+      pasha: 64565464567,
+      josh: 35464565464,
+      callum: 64564564512
 
     }
 
@@ -134,14 +161,14 @@ function advancedRead() {
 }
 
 function display(snapshot) {
-   
+
   let dbData = snapshot.val();
   console.log(dbData);
   let text = "";
   for (let [usernames, score] of Object.entries(dbData)) {
     text += usernames + ": " + score + "<br>";
   }
-   HTML_OUTPUT.innerHTML = text
+  HTML_OUTPUT.innerHTML = text
 }
 
 
