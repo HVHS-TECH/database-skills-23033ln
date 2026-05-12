@@ -81,10 +81,10 @@ function fb_readHighScoretable() {
 let names = ["lukas", "Coby", "Pasha", "Josh", "Callum"]
 
 function fb_highScoretable() {
-for (let i = 0; i < names.length; i++) {
-  let key = names[i];
-  console.log("User " + i + " " + key + " has the score of. " + highscoreTable['game1']['users'][key] + " points.")
-}
+  for (let i = 0; i < names.length; i++) {
+    let key = names[i];
+    console.log("User " + i + " " + key + " has the score of. " + highscoreTable['game1']['users'][key] + " points.")
+  }
 }
 
 
@@ -120,8 +120,8 @@ highscoreTable = {
 
   game2: {
     users: {
-      ulkas: 23266476645656,
-      ocby: 16465464654,
+      lukas: 23266476645656,
+      coby: 16465464654,
       pasha: 64565464567,
       josh: 35464565464,
       callum: 64564564512
@@ -175,6 +175,30 @@ function display(snapshot) {
 function fb_readListener() {
   console.log("Read Listener");
   firebase.database().ref('/message').on('value', displayRead)
+}
+
+var GLOBAL_user;
+
+function fb_login() {
+  authenticationListener = firebase.auth().onAuthStateChanged(fb_handleLogin);
+}
+
+function fb_handleLogin(_user) {
+  if (_user) {
+    console.log("User is logged in")
+    GLOBAL_user = _user;
+  } else {
+    console.log("User is NOT logged in - Starting the popup process")
+    fb_popupLogin();
+  }
+}
+
+function fb_popupLogin() {
+  var provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider).then((result) => {
+    GLOBAL_user = result.user;
+    console.log("User has logged in")
+  });
 }
 
 
