@@ -88,7 +88,7 @@ function fb_highScoretable() {
 }
 
 
-
+//reads the highscoretable in the database//
 function fb_readHighScoretable() {
   console.log("Reading High scores");
   firebase.database().ref('/highScoretable/game1')
@@ -100,12 +100,12 @@ function fb_displayHighScoretable(snapshot) {
   snapshot.forEach(fb_showOneScore)
 
 }
-
+// shows a child for the highscoretable on the output// 
 function fb_showOneScore(child) {
   console.log(child.key + " got " + child.val() + " points");
 
 }
-
+//the highscoretable that go's into the database and puts the highscore in it//
 highscoreTable = {
   game1: {
     users: {
@@ -133,7 +133,7 @@ highscoreTable = {
 }
 
 firebase.database().ref('/').set(highscoreTable)
-
+// changes the message in the database that wasn't the one from the goodbye one//
 function goodbye() {
   console.log("Running goodbye()")
   firebase.database().ref('/').set(
@@ -143,32 +143,41 @@ function goodbye() {
     }
   )
 }
-
+// the read that runs forever after its pressed//
 function simpleRead() {
   console.log("Reading message");
   firebase.database().ref('/').child('message').once('value', displayRead);
   console.log("Leaving simpleRead")
 }
-
+// shows the text that shows on the database from the welcome message and the goodbye message//
 function displayRead(snapshot) {
   console.log("Running displayRead(), the message is: " + snapshot.val())
   HTML_OUTPUT.innerHTML = snapshot.val();
 }
-
+//this show the output of the data on the screen in what order or anything else i put for it//
 function advancedRead() {
   console.log("Reading message");
-  firebase.database().ref('game1/users').on('value', display, fb_readError)
+  firebase.database().ref('game1/users').orderByValue().once('value', display, fb_readError)
 }
-
+//this shows the data//
 function display(snapshot) {
-
   let dbData = snapshot.val();
   console.log(dbData);
-  let text = "";
-  for (let [usernames, score] of Object.entries(dbData)) {
-    text += usernames + ": " + score + "<br>";
-  }
-  HTML_OUTPUT.innerHTML = text
+if (dbData == null) {
+  HTML_OUTPUT.innerHTML = "There is no data";
+} else {
+  snapshot.forEach(stringifiedData);
+  console.log("data transfered")
+}
+}
+function stringifiedData(strings){
+  let data = strings.val();
+  console.log(strings);
+  let usertext = "";
+  for (let [usernames] of strings.key) {
+  usertext += usernames
+}
+ HTML_OUTPUT.innerHTML += usertext + ": " + data + "<br>";
 }
 
 
@@ -176,13 +185,14 @@ function fb_readListener() {
   console.log("Read Listener");
   firebase.database().ref('/message').on('value', displayRead)
 }
-
+// to login the user //
 var GLOBAL_user;
+var authenticationListener; 
 
 function fb_login() {
   authenticationListener = firebase.auth().onAuthStateChanged(fb_handleLogin);
 }
-
+//to check if the user is login//
 function fb_handleLogin(_user) {
   if (_user) {
     console.log("User is logged in")
@@ -192,7 +202,7 @@ function fb_handleLogin(_user) {
     fb_popupLogin();
   }
 }
-
+// to have the user login//
 function fb_popupLogin() {
   var provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().signInWithPopup(provider).then((result) => {
@@ -200,5 +210,11 @@ function fb_popupLogin() {
     console.log("User has logged in")
   });
 }
+//to logout the user//
 
+function fb_logout() {
+  authenticationListener();
+  firebase.auth().signOut();
+  console.log("Sign out(hopefully)");
+}
 
