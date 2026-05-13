@@ -91,8 +91,7 @@ function fb_highScoretable() {
 //reads the highscoretable in the database//
 function fb_readHighScoretable() {
   console.log("Reading High scores");
-  firebase.database().ref('/highScoretable/game1')
-    .once('value', fb_displayHighScores.fb_readError);
+  firebase.database().ref('/game1/user').once('value', fb_displayHighScoretable, fb_readError);
 
 }
 
@@ -133,7 +132,7 @@ highscoreTable = {
 }
 
 firebase.database().ref('/').set(highscoreTable)
-// changes the message in the database that wasn't the one from the goodbye one//
+// changes the message in the database  to goodbye //
 function goodbye() {
   console.log("Running goodbye()")
   firebase.database().ref('/').set(
@@ -160,6 +159,15 @@ function advancedRead() {
   firebase.database().ref('game1/users').orderByValue().once('value', display, fb_readError)
 }
 //this shows the data//
+
+// turns out i didnt need this one //
+function saferead() {
+  console.log("Safe Read");
+  firebase.database().ref('game1/user').child('message').once('value', display, fb_readError);
+  console.log("Leaving Safe Read")
+}
+// in leaving this here because it was anyoing to make //
+
 function display(snapshot) {
   let dbData = snapshot.val();
   console.log(dbData);
