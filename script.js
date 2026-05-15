@@ -96,7 +96,7 @@ function fb_readHighScoretable() {
 }
 
 function fb_displayHighScoretable(snapshot) {
-  snapshot.forEach(fb_showOneScore)
+  snapshot.forEach(fb_showOneScore).once('value', display, fb_readError)
 
 }
 // shows a child for the highscoretable on the output// 
@@ -160,16 +160,19 @@ function advancedRead() {
 }
 //this shows the data//
 
+
+
 // turns out i didnt need this one //
 function saferead() {
   console.log("Safe Read");
   firebase.database().ref('game1/user').child('message').once('value', display, fb_readError);
   console.log("Leaving Safe Read")
 }
-// in leaving this here because it was anyoing to make //
+// in leaving this here because it was anoying to make //
 
 function display(snapshot) {
   let dbData = snapshot.val();
+    HTML_OUTPUT.innerHTML = "";
   console.log(dbData);
 if (dbData == null) {
   HTML_OUTPUT.innerHTML = "There is no data";
